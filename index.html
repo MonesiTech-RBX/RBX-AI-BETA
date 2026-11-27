@@ -1,37 +1,3 @@
-MonesiTech-RBX
-RBX-AI-BETA
-Repository navigation
-Code
-Issues
-Pull requests
-Agents
-Actions
-Projects
-Wiki
-Security and quality
-Insights
-Settings
-Files
-Go to file
-t
-T
-README.md
-index.html
-RBX-AI-BETA
-/index.html
-MonesiTech-RBX
-MonesiTech-RBX
-Create index.html
-7da8f61
- · 
-52 minutes ago
-RBX-AI-BETA
-/index.html
-
-Code
-
-Blame
-567 lines (484 loc) · 15.6 KB
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -39,6 +5,7 @@ Blame
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RBX AI — помощник для Roblox Studio</title>
   <meta name="description" content="RBX AI — ИИ-помощник для создания Roblox-проектов.">
+
   <style>
     :root {
       --bg: #080b14;
@@ -51,7 +18,6 @@ Blame
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -64,7 +30,6 @@ Blame
     }
 
     a { color: inherit; text-decoration: none; }
-
     button { font: inherit; }
 
     .wrap {
@@ -284,6 +249,8 @@ Blame
       line-height: 1.5;
     }
 
+    /* Обычное окно загрузки и предупреждения */
+
     .modal {
       position: fixed;
       inset: 0;
@@ -356,6 +323,44 @@ Blame
       line-height: 1.5;
     }
 
+    .warning-mark {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      color: #ffd36a;
+      background: #3a2d16;
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .warning-copy {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .warning-note {
+      margin: 14px 0 18px;
+      padding: 12px;
+      border: 1px solid #554b35;
+      border-radius: 12px;
+      color: #f1dfb8;
+      background: #2a2419;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .warning-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .warning-actions .button { flex: 1; }
+
     @media (max-width: 850px) {
       .plans { grid-template-columns: repeat(2, 1fr); }
       .info-grid { grid-template-columns: 1fr; }
@@ -371,6 +376,7 @@ Blame
 </head>
 
 <body>
+
   <header class="wrap">
     <a class="brand" href="#">
       <span class="logo">✦</span>
@@ -390,24 +396,32 @@ Blame
   <main>
     <div class="hero wrap">
       <span class="tag">ИИ-помощник для Roblox Studio</span>
+
       <h1>Создавай в Roblox<br>с помощью RBX AI</h1>
+
       <p>
         Помощник для идей, скриптов и работы над игровыми проектами.
         Проверяй сгенерированный код перед использованием.
       </p>
+
       <div class="actions">
-        <button class="button primary" onclick="openDownloads()">Скачать RBX AI</button>
+        <button class="button primary" onclick="openDownloads()">
+          Скачать RBX AI
+        </button>
+
         <a class="button" href="#plans">Посмотреть тарифы</a>
       </div>
     </div>
 
     <section class="wrap" id="plans">
       <h2 class="section-title">Выбери свой план</h2>
+
       <p class="section-note">
         Сайт и загрузки доступны без аккаунта. Для использования ИИ понадобится вход.
       </p>
 
       <div class="plans">
+
         <article class="plan">
           <h3>Free</h3>
           <div class="price">0 ₽ <small>/ месяц</small></div>
@@ -416,7 +430,9 @@ Blame
             <li>Базовые возможности</li>
             <li>Дополнения можно докупить</li>
           </ul>
-          <button class="button" onclick="selectPlan('Free')">Выбрать Free</button>
+          <button class="button" onclick="selectPlan('Free')">
+            Выбрать Free
+          </button>
         </article>
 
         <article class="plan">
@@ -427,7 +443,9 @@ Blame
             <li>Помощь с задачами в Studio</li>
             <li>39 Robux / месяц</li>
           </ul>
-          <button class="button" onclick="selectPlan('Go')">Выбрать Go</button>
+          <button class="button" onclick="selectPlan('Go')">
+            Выбрать Go
+          </button>
         </article>
 
         <article class="plan">
@@ -438,7 +456,9 @@ Blame
             <li>Расширенные возможности</li>
             <li>99 Robux / месяц</li>
           </ul>
-          <button class="button" onclick="selectPlan('Pro')">Выбрать Pro</button>
+          <button class="button" onclick="selectPlan('Pro')">
+            Выбрать Pro
+          </button>
         </article>
 
         <article class="plan featured">
@@ -449,13 +469,17 @@ Blame
             <li>Максимальные возможности</li>
             <li>199 Robux / месяц</li>
           </ul>
-          <button class="button primary" onclick="selectPlan('Plus')">Выбрать Plus</button>
+          <button class="button primary" onclick="selectPlan('Plus')">
+            Выбрать Plus
+          </button>
         </article>
+
       </div>
     </section>
 
     <section class="wrap" id="addons">
       <h2 class="section-title">Дополнения для Free</h2>
+
       <p class="section-note">
         Только для бесплатного плана. Дополнения оплачиваются отдельно в Robux за месяц.
       </p>
@@ -465,10 +489,12 @@ Blame
           <strong>Расширить память</strong>
           <span>19 Robux / месяц</span>
         </div>
+
         <div class="addon">
           <strong>Увеличить лимиты</strong>
           <span>19 Robux / месяц</span>
         </div>
+
         <div class="addon">
           <strong>Больше фото</strong>
           <span>9 Robux / месяц</span>
@@ -478,9 +504,12 @@ Blame
 
     <section class="wrap" id="help">
       <h2 class="section-title">Полезные ссылки</h2>
-      <p class="section-note">Всё нужное для работы с RBX AI — в одном месте.</p>
+      <p class="section-note">
+        Всё нужное для работы с RBX AI — в одном месте.
+      </p>
 
       <div class="info-grid">
+
         <div class="info-card">
           <h3>Статус сервиса</h3>
           <p>Проверяй доступность RBX AI и информацию о технических работах.</p>
@@ -504,64 +533,137 @@ Blame
             Открыть помощь
           </button>
         </div>
+
       </div>
     </section>
   </main>
 
   <footer class="wrap" id="footer">
     <div class="footer-links">
-      <a href="#" onclick="showNotice('Ссылку на бота добавим, когда он будет готов.'); return false;">Бот RBX AI</a>
-      <a href="#" onclick="showNotice('Ссылку на официальный Telegram-канал добавим позже.'); return false;">Telegram-канал</a>
+      <a href="#" onclick="showNotice('Ссылку на бота добавим, когда он будет готов.'); return false;">
+        Бот RBX AI
+      </a>
+
+      <a href="#" onclick="showNotice('Ссылку на официальный Telegram-канал добавим позже.'); return false;">
+        Telegram-канал
+      </a>
+
       <a href="https://www.tiktok.com/@m0NESY086" target="_blank" rel="noopener noreferrer">
         TikTok создателя
       </a>
-      <a href="#" onclick="showNotice('Страница статуса пока в разработке.'); return false;">Статус</a>
-      <a href="#" onclick="showNotice('Документы добавим перед запуском сервиса.'); return false;">Правила и конфиденциальность</a>
+
+      <a href="#" onclick="showNotice('Страница статуса пока в разработке.'); return false;">
+        Статус
+      </a>
+
+      <a href="#" onclick="showNotice('Документы добавим перед запуском сервиса.'); return false;">
+        Правила и конфиденциальность
+      </a>
     </div>
 
     <p class="disclaimer">
       RBX AI может допускать ошибки. Проверяйте важную информацию.
       Всегда проверяйте сгенерированный код перед запуском.
     </p>
+
     <p class="disclaimer">
       RBX AI — независимый проект, не связанный с Roblox Corporation.
     </p>
   </footer>
 
-  <div class="modal" id="downloadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <!-- Окно выбора загрузки -->
+
+  <div class="modal" id="downloadModal"
+       role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
     <div class="modal-box">
       <div class="modal-head">
         <h2 id="modalTitle">Что скачиваем?</h2>
-        <button class="close" aria-label="Закрыть" onclick="closeDownloads()">×</button>
+
+        <button class="close" aria-label="Закрыть" onclick="closeDownloads()">
+          ×
+        </button>
       </div>
 
-      <a
-        class="download-choice"
-        href="https://www.roblox.com/create"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="download-choice"
+         href="https://www.roblox.com/create"
+         target="_blank"
+         rel="noopener noreferrer">
+
         <strong>Только Roblox Studio</strong>
         <span>Открыть официальную страницу Roblox Studio.</span>
       </a>
 
       <button class="download-choice" onclick="downloadChoice('Только RBX AI')">
         <strong>Только RBX AI</strong>
-        <span>Установщик RBX AI пока не готов.</span>
+        <span>Скачать установщик RBX AI.</span>
       </button>
 
       <button class="download-choice" onclick="downloadChoice('Всё вместе')">
         <strong>Всё вместе</strong>
-        <span>Общий установщик пока не готов.</span>
+        <span>Скачать RBX AI и открыть страницу Roblox Studio.</span>
       </button>
 
       <div id="notice"></div>
     </div>
   </div>
 
+  <!-- Окно предупреждения -->
+
+  <div class="modal" id="warningModal"
+       role="dialog" aria-modal="true" aria-labelledby="warningTitle">
+
+    <div class="modal-box">
+
+      <div class="warning-mark">!</div>
+
+      <div class="modal-head">
+        <h2 id="warningTitle">Предупреждение Windows</h2>
+
+        <button class="close" aria-label="Закрыть" onclick="closeWarning()">
+          ×
+        </button>
+      </div>
+
+      <p class="warning-copy">
+        При запуске установщика Windows может показать окно
+        «Система Windows защитила ваш компьютер»
+        (Microsoft Defender SmartScreen).
+      </p>
+
+      <p class="warning-copy">
+        Это может происходить, потому что установщик пока не имеет
+        цифровой подписи или широкой репутации.
+      </p>
+
+      <div class="warning-note">
+        Это информационное окно сайта RBX AI, а не системное окно Windows.
+        Скачивайте установщик только из официального репозитория RBX AI.
+        Если источник файла вызывает сомнения, отмените загрузку.
+      </div>
+
+      <div class="warning-actions">
+
+        <button class="button" onclick="closeWarning()">
+          Отмена
+        </button>
+
+        <a class="button primary"
+           id="continueDownload"
+           href="https://github.com/MonesiTech-RBX/RBX-AI-BETA/releases/latest/download/RBX-AI-Setup.exe">
+          Продолжить скачивание
+        </a>
+
+      </div>
+    </div>
+  </div>
+
   <script>
     const modal = document.getElementById("downloadModal");
+    const warningModal = document.getElementById("warningModal");
     const notice = document.getElementById("notice");
+
+    let downloadMode = "only";
 
     function openDownloads() {
       notice.style.display = "none";
@@ -578,25 +680,56 @@ Blame
     }
 
     function downloadChoice(choice) {
-      showNotice(
-        choice + ": загрузка пока не подключена. " +
-        "Когда будет готов установочный файл, добавим настоящую ссылку."
-      );
+      downloadMode = choice === "Всё вместе" ? "all" : "only";
+
+      closeDownloads();
+      warningModal.classList.add("open");
     }
 
+    function closeWarning() {
+      warningModal.classList.remove("open");
+    }
+
+    document.getElementById("continueDownload").addEventListener("click", function() {
+      if (downloadMode === "all") {
+        window.open(
+          "https://www.roblox.com/create",
+          "_blank",
+          "noopener,noreferrer"
+        );
+      }
+    });
+
     function selectPlan(plan) {
-      showNotice("Выбран план " + plan + ". Вход и оплата пока не подключены.");
-      document.getElementById("plans").scrollIntoView({ behavior: "smooth" });
+      showNotice(
+        "Выбран план " + plan +
+        ". Вход и оплата пока не подключены."
+      );
+
+      document.getElementById("plans").scrollIntoView({
+        behavior: "smooth"
+      });
     }
 
     modal.addEventListener("click", function(event) {
-      if (event.target === modal) closeDownloads();
+      if (event.target === modal) {
+        closeDownloads();
+      }
+    });
+
+    warningModal.addEventListener("click", function(event) {
+      if (event.target === warningModal) {
+        closeWarning();
+      }
     });
 
     document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") closeDownloads();
+      if (event.key === "Escape") {
+        closeDownloads();
+        closeWarning();
+      }
     });
   </script>
+
 </body>
 </html>
-While the code is focused, press Alt+F1 for a menu of operations.
